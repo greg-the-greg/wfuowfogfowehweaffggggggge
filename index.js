@@ -13,16 +13,18 @@ const client = new Discord.Client({intents : [Discord.GatewayIntentBits.Guilds]}
 client.login(process.env.TOKEN)
 
 client.once(Discord.Events.ClientReady,c=>{
-	client.channels.cache.get('1052005644418416793').send('\'m a gnome')
+	client.channels.cache.get(process.env.CHANNEL_ID).send('\'m a gnome')
     console.log("logged in");
 })
-const webhookClient = new Discord.WebhookClient({ url: 'https://discord.com/api/webhooks/1052021979844202596/RaoOWDgHh10qXiGKFSu8f4zIv0mR0rptANiZnPv0LsYalChV8uw2jIqi4OUz8Rbpb2qB'});
+
+const webhookClient = new Discord.WebhookClient({ url: process.env.WEBHOOK_CLIENT});
+
 
 app.listen(3000,()=>{
 	console.log("listening at 3000");
 })
 
-var ignoreList = ["21,52,6,3"]
+var ignoreList = [process.env.COORDS.replace(/_/g,",")]
 
 app.post("/discord",async(req, res)=>{
 	console.log("I've listened");
@@ -33,7 +35,7 @@ app.post("/discord",async(req, res)=>{
 				return
 			}
 		}
-		const channel = client.channels.cache.get("1052005644418416793");
+		const channel = client.channels.cache.get(process.env.CHANNEL_ID);
 		if (req.body.name === "SERVER" && !req.body.data.startsWith("Player")){//Player entered region! player
 			channel.send(`<@&1052688208795811860> ${req.body.coords} activated!`)
 		}
