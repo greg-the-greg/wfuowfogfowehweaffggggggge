@@ -6,4 +6,4 @@ var options = {
    body: JSON.stringify({coords : "snoop doog",data: "wigga wogga", name : "SERVER"}) // body data type must match "Content-Type" header
 }
 console.log("here");
-fetch("https://wfuowfogfowehweaffggggggge.greg-the-greg.repl.co/discord",options).then(re=>console.log(re))
+fetch("/discord",options).then(re=>console.log(re))
