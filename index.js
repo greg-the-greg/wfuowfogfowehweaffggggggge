@@ -1,16 +1,19 @@
 require("dotenv").config()
 
+const cors = require("cors")
 const express = require("express")
 const app = express()
 app.use(express.static("public"))
 app.use(express.json())
+
+app.use(cors())
 
 const Discord = require("discord.js")
 const client = new Discord.Client({intents : [Discord.GatewayIntentBits.Guilds]})
 client.login(process.env.TOKEN)
 
 client.once(Discord.Events.ClientReady,c=>{
-	client.channels.cache.get('1052005644418416793').send('Hello here!')
+	client.channels.cache.get('1052005644418416793').send('\'m a gnome')
     console.log("logged in");
 })
 const webhookClient = new Discord.WebhookClient({ url: 'https://discord.com/api/webhooks/1052021979844202596/RaoOWDgHh10qXiGKFSu8f4zIv0mR0rptANiZnPv0LsYalChV8uw2jIqi4OUz8Rbpb2qB'});
